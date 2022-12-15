@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Home</string>
+    <string name="generic_error_message">Something went wrong!</string>
+</resources>

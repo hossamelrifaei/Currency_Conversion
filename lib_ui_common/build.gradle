@@ -1,0 +1,15 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildFeatures {
+        viewBinding true
+    }
+}
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+}
