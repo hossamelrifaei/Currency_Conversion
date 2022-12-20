@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.model.ExchangeModel
 import com.example.domain.usecase.CalculateRatesUseCase
 import com.example.domain.usecase.GetAndStoreCurrencies
+import com.example.lib_ui_common.extensions.toDoubleOrZero
 import com.example.lib_ui_common.state.ViewState
 import com.example.lib_ui_common.state.ViewState.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,42 +45,39 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onAmountUpdated(amount: String) {
-        amount.toDoubleOrNull()?.let { inputAmount ->
-            _viewState.value = _viewState.value.let { state ->
-                when (state) {
-                    Error -> state
-                    Loading -> state
-                    is Success -> state.copy(
-                        data = state.data.copy(
-                            resultRates = calculateRatesUseCase(
-                                state.data.rates,
-                                state.data.rates.firstOrNull { it.currency == state.data.currency },
-                                inputAmount
-                            )
+        _viewState.value = _viewState.value.let { state ->
+            when (state) {
+                Error -> state
+                Loading -> state
+                is Success -> state.copy(
+                    data = state.data.copy(
+                        resultRates = calculateRatesUseCase(
+                            state.data.rates,
+                            state.data.rates.firstOrNull { it.currency == state.data.currency },
+                            amount.toDoubleOrZero()
                         )
                     )
-                }
+                )
             }
         }
     }
 
     fun onCurrencySelected(index: Int, amount: String) {
-        amount.toDoubleOrNull()?.let { inputAmount ->
-            _viewState.value.let { state ->
-                if (state is Success) {
-                    _viewState.value = state.copy(
-                        data = state.data.copy(
-                            currency = state.data.rates.get(index).currency,
-                            resultRates = calculateRatesUseCase(
-                                state.data.rates,
-                                state.data.rates.get(index),
-                                inputAmount
-                            )
+        _viewState.value = _viewState.value.let { state ->
+            when (state) {
+                Error -> state
+                Loading -> state
+                is Success -> state.copy(
+                    data = state.data.copy(
+                        currency = state.data.rates[index].currency,
+                        resultRates = calculateRatesUseCase(
+                            state.data.rates,
+                            state.data.rates[index],
+                            amount.toDoubleOrZero()
                         )
                     )
-                }
+                )
             }
         }
-
     }
 }

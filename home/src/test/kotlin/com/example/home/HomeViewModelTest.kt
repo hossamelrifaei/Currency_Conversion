@@ -70,12 +70,15 @@ class HomeViewModelTest {
 
     @Test
     fun `Should not update the view state when the amount is empty`() = runTest {
-        val currency = "USD"
+        val currency = ExchangeModel.ExchangeRate("USD", 1.0)
         val rates = listOf(ExchangeModel.ExchangeRate("USD", 1.0))
         val resultRates = listOf(ExchangeModel.ExchangeRate("USD", 1.0))
-        val exchangeModel = ExchangeModel(currency, rates, resultRates)
+        val exchangeModel = ExchangeModel(currency.currency, rates, resultRates)
 
         whenever(getAndStoreCurrencies.invoke()).thenReturn(exchangeModel)
+        whenever(calculateRatesUseCase(rates, currency, 0.0)).thenReturn(
+            resultRates
+        )
         viewModel = HomeViewModel(getAndStoreCurrencies, calculateRatesUseCase)
 
         viewModel.onCurrencySelected(0, "")
@@ -86,6 +89,7 @@ class HomeViewModelTest {
         )
 
         verify(getAndStoreCurrencies).invoke()
+        verify(calculateRatesUseCase).invoke(any(), any(), any())
         verifyNoMoreInteractions(getAndStoreCurrencies, calculateRatesUseCase)
     }
 
@@ -141,6 +145,7 @@ class HomeViewModelTest {
         viewModel.onAmountUpdated("not a number")
 
         verify(getAndStoreCurrencies).invoke()
+        verify(calculateRatesUseCase).invoke(any(), any(), any())
         verifyNoMoreInteractions(calculateRatesUseCase, getAndStoreCurrencies)
     }
 
