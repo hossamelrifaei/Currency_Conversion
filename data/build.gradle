@@ -9,11 +9,11 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "API_APP_ID", "\"2d3d8a71e60347bd9e52f7f4291106d7\""
+            buildConfigField "String", "API_APP_ID", "\"ce20c05b511b42ee8b69b79fd0aa7953\""
             buildConfigField "String", "BASE_URL", "\"https://openexchangerates.org/\""
         }
         release {
-            buildConfigField "String", "API_APP_ID", "\"2d3d8a71e60347bd9e52f7f4291106d7\""
+            buildConfigField "String", "API_APP_ID", "\"ce20c05b511b42ee8b69b79fd0aa7953\""
             buildConfigField "String", "BASE_URL", "\"https://openexchangerates.org/\""
         }
     }
