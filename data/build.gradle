@@ -19,6 +19,7 @@ android {
             buildConfigField "String", "BASE_URL", "\"https://openexchangerates.org/\""
         }
     }
+    namespace 'com.example.data'
 }
 
 dependencies {

@@ -12,6 +12,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.example.lib_ui_common'
 }
 dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat_version"

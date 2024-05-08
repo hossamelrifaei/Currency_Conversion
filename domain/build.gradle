@@ -8,6 +8,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
     }
+    namespace 'com.example.domain'
 }
 
 dependencies {
