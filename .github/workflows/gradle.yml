@@ -36,7 +36,6 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-jobs:
   test:
     name: Unit Test
     runs-on: ubuntu-latest
