@@ -8,7 +8,6 @@ android {
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdk rootProject.ext.compileSdkVersion
     }
 }
 

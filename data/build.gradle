@@ -6,7 +6,9 @@ plugins {
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+    }
     buildTypes {
         debug {
             buildConfigField "String", "API_APP_ID", "\"ce20c05b511b42ee8b69b79fd0aa7953\""
